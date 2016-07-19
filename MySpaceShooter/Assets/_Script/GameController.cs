@@ -23,7 +23,9 @@ public class GameController : MonoBehaviour {
 	public Text gameOverText;
 	private bool gameOver;
 
-
+	// 添加重新开始的功能
+	public Text restartText;
+	private bool restart;
 
 
 	// Use this for initialization
@@ -34,10 +36,19 @@ public class GameController : MonoBehaviour {
 
 		gameOverText.text = "";
 		gameOver = false;
+
+		restartText.text = "";
+		restart = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (restart) {
+			if (Input.GetKeyDown (KeyCode.R)) {
+				Application.LoadLevel (Application.loadedLevel);
+			}
+		}
 
 	}
 
@@ -53,10 +64,16 @@ public class GameController : MonoBehaviour {
 
 				Instantiate (hazard, spawnPosition, spawnRotation);
 
+				if (gameOver) {
+					break;
+				}
+
 				yield return new WaitForSeconds (spawnWait);
 			}
 
 			if (gameOver) {
+				restartText.text = "按［R］键重新开始";
+				restart = true;
 				break;
 			}
 		}

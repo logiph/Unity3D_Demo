@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour {
 	public float tilt = 4.0f;
 
 	// 控制子弹发射
-	public float fireRate = 0.5f;
+	public float fireRate = 0.3f;
 	public GameObject shot;
 	public Transform shotSpawn;
 	public float nextFire = 0.0f;
