@@ -19,6 +19,11 @@ public class GameController : MonoBehaviour {
 	public Text scoreText;
 	private int score;
 
+	// 游戏结束功能
+	public Text gameOverText;
+	private bool gameOver;
+
+
 
 
 	// Use this for initialization
@@ -26,6 +31,9 @@ public class GameController : MonoBehaviour {
 		score = 0;
 		UpdateScore ();
 		StartCoroutine(SpawnWaves ());
+
+		gameOverText.text = "";
+		gameOver = false;
 	}
 	
 	// Update is called once per frame
@@ -47,6 +55,10 @@ public class GameController : MonoBehaviour {
 
 				yield return new WaitForSeconds (spawnWait);
 			}
+
+			if (gameOver) {
+				break;
+			}
 		}
 
 	}
@@ -62,5 +74,12 @@ public class GameController : MonoBehaviour {
 
 		scoreText.text = "得分: " + score;
 	}
+
+	public void GameOver() {
+
+		gameOver = true;
+		gameOverText.text = "游戏结束";
+	}
+
 
 }
