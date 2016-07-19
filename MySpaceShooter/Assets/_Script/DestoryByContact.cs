@@ -6,10 +6,24 @@ public class DestoryByContact : MonoBehaviour {
 	public GameObject explosion;
 	public GameObject playerExplosion;
 
+	// 添加记分
+	public int scoreValue = 10;
+	private GameController gameController;
 
 	// Use this for initialization
 	void Start () {
-	
+
+		GameObject go = GameObject.FindWithTag ("GameController");
+
+		if (go != null) {
+			gameController = go.GetComponent<GameController> ();
+		} else {
+			Debug.Log ("can't find GameController ");
+		}
+
+		if (gameController == null) {
+			Debug.Log ("can't find GameController.cs");
+		}
 	}
 	
 	// Update is called once per frame
@@ -29,6 +43,8 @@ public class DestoryByContact : MonoBehaviour {
 		if (other.tag == "Player") {		
 			Instantiate (playerExplosion, other.transform.position, other.transform.rotation);
 		}
+
+		gameController.AddScore (scoreValue);
 
 		Destroy (other.gameObject);
 		Destroy (gameObject);

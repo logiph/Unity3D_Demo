@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
@@ -14,9 +15,16 @@ public class GameController : MonoBehaviour {
 	public float startWait = 1.0f;
 	public float waveWait = 2.0f;
 
+	// 记分功能
+	public Text scoreText;
+	private int score;
+
+
+
 	// Use this for initialization
 	void Start () {
-	
+		score = 0;
+		UpdateScore ();
 		StartCoroutine(SpawnWaves ());
 	}
 	
@@ -41,6 +49,18 @@ public class GameController : MonoBehaviour {
 			}
 		}
 
+	}
+
+	public void AddScore(int newScoreValue) {
+	
+		score += newScoreValue;
+
+		UpdateScore ();
+	}
+
+	void UpdateScore () {
+
+		scoreText.text = "得分: " + score;
 	}
 
 }
