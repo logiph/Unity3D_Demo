@@ -72,8 +72,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 						Debug.Log ("target " + targetPosition); 
 
-						transform.gameObject.GetComponent<Animator> ().Play ("HumanoidRun", 0);
-						transform.Translate (Vector3.forward * 0.5f);
+//						transform.gameObject.GetComponent<Animator> ().Play ("HumanoidRun", 0);
+//						transform.Translate (Vector3.forward * 0.5f);
 					}
 
 				}
