@@ -13,11 +13,16 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Vector3 m_Move;
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
 
+		// 添加自动寻路，这里保存目标的位置
 		private Vector3 targetPosition;
-
 		public Camera mainCamera;
-		private Time timestamp;
+		private float timestamp;
 		private bool stop;
+
+		// 自动导航
+		public Transform TargetObject;
+
+
 
         private void Start()
         {
@@ -37,6 +42,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             m_Character = GetComponent<ThirdPersonCharacter>();
 
 			stop = false;
+
+			if (TargetObject != null) {
+//				GetComponent<NavMeshAgent> ().destination = TargetObject.position;
+			}
         }
 
 
@@ -52,12 +61,16 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				return;
 			}
 
-			if (Input.GetMouseButton (1)) {
+			float currentTime = Time.time;
 
-				stop = true;
+			if (Input.GetMouseButton (1) && currentTime - timestamp > 0.5f) {
+				
+//				stop = true;
+
+				timestamp = currentTime;
 
 				Vector3 screenPosition = Input.mousePosition;
-				Debug.Log ("mouse pos" + screenPosition);
+				Debug.Log ("mouse pos" + screenPosition + "deltal time:" + Time.deltaTime + "time:" + Time.time);
 
 				Ray ray =  mainCamera.ScreenPointToRay (screenPosition);
 				RaycastHit hit;
@@ -71,6 +84,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 						transform.LookAt (targetPosition);
 
 						Debug.Log ("target " + targetPosition); 
+
+
+						GetComponent<NavMeshAgent> ().destination = targetPosition;
 
 //						transform.gameObject.GetComponent<Animator> ().Play ("HumanoidRun", 0);
 //						transform.Translate (Vector3.forward * 0.5f);
@@ -119,10 +135,18 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}
 
 
-//			Debug.Log ( "move " + m_Move + " crouch " + crouch + " jump " + m_Jump);
-            // pass all parameters to the character control script
-            m_Character.Move(m_Move, crouch, m_Jump);
-            m_Jump = false;
-        }
+//			if (!stop) {
+//				stop = true;
+//
+//				m_Move = new Vector3 (-1.0f, 0f, 1.0f);
+//
+//			}
+
+			//			Debug.Log ( "move " + m_Move + " crouch " + crouch + " jump " + m_Jump);
+			// pass all parameters to the character control script
+			m_Character.Move(m_Move, crouch, m_Jump);
+			m_Jump = false;
+
+		}
     }
 }
