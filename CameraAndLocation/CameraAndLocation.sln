@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{033ADB6D-AC87-8D12-AFD1-FC2D1C476140}") = "CameraAndLocation", "Assembly-CSharp-firstpass.csproj", "{CC4D92BF-5CFE-9A83-9783-9A48F7A0A286}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC4D92BF-5CFE-9A83-9783-9A48F7A0A286}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC4D92BF-5CFE-9A83-9783-9A48F7A0A286}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC4D92BF-5CFE-9A83-9783-9A48F7A0A286}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC4D92BF-5CFE-9A83-9783-9A48F7A0A286}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
