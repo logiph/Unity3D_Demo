@@ -88,6 +88,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             // read inputs
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
             float v = CrossPlatformInputManager.GetAxis("Vertical");
+
+//			Debug.Log ("v" + v + " h" + h);
+
+			// 禁用后退的按钮
+			if (v < 0) {
+				return;
+			}
+
             bool crouch = Input.GetKey(KeyCode.C);
 
             // calculate move direction to pass to character
