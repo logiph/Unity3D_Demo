@@ -89,6 +89,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private Vector3 m_GroundContactNormal;
         private bool m_Jump, m_PreviouslyGrounded, m_Jumping, m_IsGrounded;
 
+		// 目标点坐标
+		private Vector3 targetPosition;
 
         public Vector3 Velocity
         {
@@ -134,6 +136,29 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_Jump = true;
             }
+
+//			if (Input.GetMouseButton (1)) {
+//
+//				Vector3 screenPosition = Input.mousePosition;
+//				Ray ray = Camera.main.ScreenPointToRay (screenPosition);
+//				RaycastHit hit;
+//				Debug.Log ("eeeaoe");
+//				if (Physics.Raycast (ray, out hit)) {
+//
+//					if (hit.collider.gameObject.tag == "Terrain") {
+//
+//						targetPosition = hit.point;
+//
+//						transform.LookAt (targetPosition);
+//
+//						transform.gameObject.GetComponent<Animation> ().Play ("run");
+//						transform.Translate (Vector3.forward * 0.5f);
+//					}
+//
+//				}
+//
+//			}
+
         }
 
 

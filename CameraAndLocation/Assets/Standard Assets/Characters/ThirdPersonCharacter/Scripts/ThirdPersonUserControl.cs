@@ -13,7 +13,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Vector3 m_Move;
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
 
-        
+		private Vector3 targetPosition;
+
+		public Camera mainCamera;
+		private Time timestamp;
+		private bool stop;
+
         private void Start()
         {
             // get the transform of the main camera
@@ -30,6 +35,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             // get the third person character ( this should never be null due to require component )
             m_Character = GetComponent<ThirdPersonCharacter>();
+
+			stop = false;
         }
 
 
@@ -39,7 +46,40 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             }
-        }
+
+
+			if (stop) {
+				return;
+			}
+
+			if (Input.GetMouseButton (1)) {
+
+				stop = true;
+
+				Vector3 screenPosition = Input.mousePosition;
+				Debug.Log ("mouse pos" + screenPosition);
+
+				Ray ray =  mainCamera.ScreenPointToRay (screenPosition);
+				RaycastHit hit;
+				Debug.Log ("eeeaoe");
+				if (Physics.Raycast (ray, out hit)) {
+
+					if (hit.collider.gameObject.tag == "Terrain") {
+
+						targetPosition = hit.point;
+
+						transform.LookAt (targetPosition);
+
+						Debug.Log ("target " + targetPosition); 
+
+						transform.gameObject.GetComponent<Animator> ().Play ("HumanoidRun", 0);
+						transform.Translate (Vector3.forward * 0.5f);
+					}
+
+				}
+
+			}
+		}
 
 
         // Fixed update is called in sync with physics
@@ -66,7 +106,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			// walk speed multiplier
 	        if (Input.GetKey(KeyCode.LeftShift)) m_Move *= 0.5f;
 #endif
+			if (m_Move.x == 0 && m_Move.y == 0 && m_Move.z == 0 ) {
+//				Debug.Log("idle");
+			}
 
+
+//			Debug.Log ( "move " + m_Move + " crouch " + crouch + " jump " + m_Jump);
             // pass all parameters to the character control script
             m_Character.Move(m_Move, crouch, m_Jump);
             m_Jump = false;
