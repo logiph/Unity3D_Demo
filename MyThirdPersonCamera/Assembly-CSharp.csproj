@@ -48,6 +48,7 @@
      <Compile Include="Assets\DungeonCamera.cs" />
      <Compile Include="Assets\FollowCamera.cs" />
      <Compile Include="Assets\LookAtCamera.cs" />
+     <Compile Include="Assets\MouseAimCamera.cs" />
      <Compile Include="Assets\Player.cs" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
