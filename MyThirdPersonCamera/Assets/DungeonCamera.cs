@@ -26,5 +26,4 @@ public class DungeonCamera : MonoBehaviour {
 		transform.position = position;
 		transform.LookAt (target.transform.position);
 	}
-
 }
